@@ -1,8 +1,9 @@
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:peerp_toon/SellerApp/deshbord/productlistwidget.dart';
-import 'package:peerp_toon/SellerApp/deshbord/sallerHistory/sellerproducthistory.dart';
+import 'package:peerp_toon/SellerApp/dashbord/productlistwidget.dart';
+import 'package:peerp_toon/SellerApp/dashbord/sallerHistory/sellerproducthistory.dart';
+
 import 'package:provider/provider.dart';
 
 import '../../app/constants/app.colors.dart';

@@ -16,7 +16,7 @@ final List<SalomonBottomBarItem> bottomNavBarIcons = [
   SalomonBottomBarItem(
     icon: const Icon(Icons.home),
     title: const Text("Home"),
-    selectedColor: Colors.purple,
+    selectedColor: Colors.pinkAccent,
   ),
 
   /// Search

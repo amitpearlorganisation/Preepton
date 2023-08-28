@@ -1,0 +1,54 @@
+[
+  {
+    "category": "phone",
+    "products": [
+      {
+        "mobile": "samsung",
+        "price": "10000",
+        "discount": "25%",
+        "MRP": "12000",
+        "name": "note pro 4",
+        "image": "dddddd.dddd"
+      },
+      {
+        "mobile": "iphone",
+        "price": "80000",
+        "discount": "15%",
+        "MRP": "95000",
+        "name": "iPhone 13",
+        "image": "eeeeee.eeee"
+      }
+    ]
+  },
+  {
+    "category": "grocery",
+    "products": [
+      {
+        "name": "Colgate",
+        "price": "100",
+        "discount": "25%",
+        "MRP": "120",
+        "image": "dddd"
+      }
+    ]
+  },
+  {
+    "category": "electronics",
+    "products": [
+      {
+        "name": "Laptop",
+        "price": "800",
+        "discount": "10%",
+        "MRP": "900",
+        "image": "laptop.jpg"
+      },
+      {
+        "name": "Headphones",
+        "price": "50",
+        "discount": "5%",
+        "MRP": "55",
+        "image": "headphones.jpg"
+      }
+    ]
+  }
+]

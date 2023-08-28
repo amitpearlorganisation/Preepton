@@ -10,10 +10,13 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
 
+
     <application
         android:label="Peeptoon"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
+        <meta-data android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyA695FzYYRDkyrvue7VCb-kZeOlfbfG22w"/>
         <activity
             android:name=".MainActivity"
             android:exported="true"
@@ -40,7 +43,7 @@
         <meta-data
             android:name="flutterEmbedding"
             android:value="2" />
-       <meta-data android:name="com.google.android.geo.API_KEY"
-           android:value="AIzaSyCLmi7d9HhYyDKPMK8qZ-zMU8K9lMzKyh8"/>
+       <meta-data android:name="com.google.android.geo.AIzaSyA695FzYYRDkyrvue7VCb-kZeOlfbfG22w"
+           android:value="AIzaSyA695FzYYRDkyrvue7VCb-kZeOlfbfG22w"/>
     </application>
 </manifest>

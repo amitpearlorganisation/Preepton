@@ -7,7 +7,8 @@ import 'package:image_picker/image_picker.dart';
 import 'package:peerp_toon/presentation/screens/sellerScreen/seller.screen.dart';
 import 'package:peerp_toon/presentation/widgets/dimensions.widget.dart';
 
-import '../../../SellerApp/deshbord/homeDeshbord.dart';
+import '../../../SellerApp/dashbord/homeDeshbord.dart';
+
 
 class SellerRegistration extends StatefulWidget {
   SellerRegistration({Key? key}) : super(key: key);

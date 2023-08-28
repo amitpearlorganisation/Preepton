@@ -1,7 +1,11 @@
 
+import 'dart:ffi';
+
+import 'package:blurrycontainer/blurrycontainer.dart';
 import 'package:clay_containers/widgets/clay_container.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:peerp_toon/Bloc/product_bloc.dart';
 import 'package:peerp_toon/app/models/product_models.dart';
 import 'package:peerp_toon/presentation/screens/productCategory/productCategory.dart';
@@ -24,6 +28,17 @@ class BrandWidget extends StatefulWidget {
 bool isResponseSaved = false;
 
 class _BrandWidgetState extends State<BrandWidget> {
+  List<Map<String, dynamic>> _category = List.generate(
+    10,
+        (index) => {
+      'name': 'Category $index',
+      'image': 'assets/category_$index.png', // Assuming you have these images
+    },
+  );
+
+  int _visibleItemCount = 2; // Number of initially visible items
+  bool _showAll = false;
+
   @override
   void initState() {
     if(!isResponseSaved){
@@ -129,14 +144,18 @@ class _BrandWidgetState extends State<BrandWidget> {
       children: [
         Container(
           width: double.infinity,
-          height: 120,
+          height: 150,
           child:
           BlocBuilder<ProductBloc, ProductState>(
             builder: (context, state) {
 
               if (state is ProductLoadingState) {
-                return const Center(
-                  child: CircularProgressIndicator(),
+                return  Center(
+                  child: LoadingAnimationWidget.discreteCircle(
+              size: 50, color: Colors.green,
+                    secondRingColor: Colors.deepOrangeAccent,
+                    thirdRingColor: Colors.redAccent
+              ),
                 );
               } else if (state is ProductLoadedState) {
 
@@ -149,28 +168,50 @@ class _BrandWidgetState extends State<BrandWidget> {
                     String firstWord = words.isNotEmpty ? words[0] : "";
 
                     return GestureDetector(
-                     onTap: (){
-                       Navigator.push(context, MaterialPageRoute(builder: (context)=> ProductCategory()));
-                     },
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => ProductCategory()),
+                        );
+                      },
                       child: Card(
-                        elevation: 10,
+                        margin: EdgeInsets.symmetric(horizontal: 2, vertical: 2),
+                        shadowColor: Colors.grey.withOpacity(0.6),
+                        elevation: 5,
                         child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Image.network(
-                              state.productModel[index].image.toString(),
-                              height: 80,
-                              width: 80,
-                              fit: BoxFit.fill,
+                            Container(
+                              height: 90, // Adjust the height as needed
+                              width: 90,
+                              // Adjust the width as needed
+                              padding: EdgeInsets.all(8),
+                              child: Image.network(
+                                state.productModel[index].image.toString(),
+                                fit: BoxFit.fill,
+                              ),
                             ),
-                            Text(firstWord),
+                            Container(
+                              width: 120,
+                              child: Align(
+                                alignment: Alignment.center,
+                                child: Text(
+                                  textAlign: TextAlign.center,
+                                  firstWord,
+                                  style:
+                                  TextStyle(fontSize: 12, fontWeight: FontWeight.w500, color: Colors.black.withOpacity(0.6),
+                                  letterSpacing: 1, fontFamily: "Libre"),
+                                ),
+                              ),
+                            ),
                           ],
                         ),
                       ),
                     );
-
-                  }
-                  ,
+                  },
                 );
+
               } else if (state is ProductErrorState) {
                 return Center(
                   child: Text(state.errorMessage),
@@ -183,12 +224,15 @@ class _BrandWidgetState extends State<BrandWidget> {
         vSizedBox2,
         Text(
           "Recently Viewed Stores",
-          style: TextStyle(
-              color: Colors.black, fontWeight: FontWeight.w500, fontSize: 22),
+          style:
+          TextStyle(
+              color: Colors.black.withOpacity(0.6), fontWeight: FontWeight.w500, fontSize: 14, letterSpacing: 1 ,
+              fontFamily: "Libre"
+          ),
         ),
         vSizedBox1,
         Container(
-          height: 200,
+          height: 180,
           child: BlocBuilder<ProductBloc, ProductState>(
             builder: (context, state) {
               if (state is ProductLoadingState) {
@@ -200,21 +244,59 @@ class _BrandWidgetState extends State<BrandWidget> {
                   scrollDirection: Axis.horizontal,
                   itemCount: state.productModel.length,
                   itemBuilder: (context, index) {
-                    return Flexible(
-                      child: Container(
-                        width: 130,
-                        child: Card(
-                          elevation: 1,
-                          child: Column(
-                            children: [
-                              Image.network(
+                    String title = state.productModel[index].title.toString();
+                    List<String> words = title.split(" ");
+                    String firstWord = words.isNotEmpty ? words[0] : "";
+                    return Container(
+                      width: 200,
+                      child: Card(
+                        elevation: 1,
+                        shadowColor: Colors.grey.withOpacity(0.8),
+                        margin: EdgeInsets.symmetric(horizontal: 2,vertical: 2),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Container(
+                              height: 100, // Adjust the height as needed
+                              width: 100,
+                              padding: EdgeInsets.all(8),
+                              child: Image.network(
                                 state.productModel[index].image.toString(),
-                                height: 100,
-                                fit: BoxFit.scaleDown,
+                                fit: BoxFit.fill,
                               ),
-                              Text(state.productModel[index].title.toString()),
+                            ),
+                            SizedBox(height: 10,),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Container(
+                                  margin: EdgeInsets.only(right: 5),
+                                  padding: EdgeInsets.symmetric(horizontal: 5,vertical: 2),
+                          decoration: BoxDecoration(
+                            color: Colors.pink,
+                            borderRadius: BorderRadius.circular(2),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.grey.withOpacity(0.2),
+                                spreadRadius: 2,
+                                blurRadius: 5,
+                                offset: Offset(0, 3), // Controls the position of the shadow
+                              ),
                             ],
                           ),
+                                  child: Text("27% off", style:
+                                  TextStyle(fontSize: 12, fontWeight: FontWeight.w500, color: Colors.white.withOpacity(0.9),
+                                      letterSpacing: 1, fontFamily: "Libre"),
+                                  ),
+                                ),
+                                Text(firstWord, style:
+                                TextStyle(fontSize: 12, fontWeight: FontWeight.w500, color: Colors.black.withOpacity(0.6),
+                                    letterSpacing: 1, fontFamily: "Libre"),
+                                ),
+                              ],
+                            ),
+                          ],
                         ),
                       ),
                     );
@@ -230,9 +312,13 @@ class _BrandWidgetState extends State<BrandWidget> {
         vSizedBox1,
         Text(
           "Popular Products",
-          style: TextStyle(
-              color: Colors.black, fontWeight: FontWeight.w500, fontSize: 22),
+          style:
+          TextStyle(
+              color: Colors.black.withOpacity(0.6), fontWeight: FontWeight.w500, fontSize: 14, letterSpacing: 1 ,
+              fontFamily: "Libre"
+          ),
         ),
+        SizedBox(height: 5,),
         Container(
           height: 150,
           child: ListView.builder(
@@ -240,17 +326,49 @@ class _BrandWidgetState extends State<BrandWidget> {
             itemCount: _categories.length,
             itemBuilder: (context, index) {
               return Container(
-                width: 130,
+                width: 150,
                 child: Card(
+                  margin: EdgeInsets.symmetric(horizontal: 2, vertical: 2),
                   elevation: 1,
                   child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      Image.asset(
-                        _category[index]['image'],
-                        height: 100,
-                        fit: BoxFit.scaleDown,
+                      Container(
+                        width: 100,
+                        padding: EdgeInsets.all(8),
+                        child: Image.asset(
+                          _category[index]['image'],
+                          fit: BoxFit.scaleDown,
+                        ),
                       ),
-                      Text(_category[index]['name']),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Container(
+                            margin: EdgeInsets.only(right: 5),
+                            padding: EdgeInsets.symmetric(horizontal: 5,vertical: 2),
+                            decoration: BoxDecoration(
+                              color: Colors.pink,
+                              borderRadius: BorderRadius.circular(2),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.grey.withOpacity(0.2),
+                                  spreadRadius: 2,
+                                  blurRadius: 5,
+                                  offset: Offset(0, 3), // Controls the position of the shadow
+                                ),
+                              ],
+                            ),
+                            child: Text("27% off", style: TextStyle(fontWeight: FontWeight.w400, letterSpacing: 1,
+                                fontFamily: "Libre",
+                                fontSize: 12, color: Colors.white)),
+                          ),
+                          SizedBox(height: 5,),
+
+                          Text(_category[index]['name'], style: TextStyle(fontSize: 12, fontFamily: "Libre",color: Colors.black.withOpacity(0.6)),),
+                        ],
+                      ),
                     ],
                   ),
                 ),
@@ -261,32 +379,67 @@ class _BrandWidgetState extends State<BrandWidget> {
         vSizedBox1,
         Text(
           "Recommended Products",
-          style: TextStyle(
-              color: Colors.black, fontWeight: FontWeight.w500, fontSize: 22),
+          style:
+          TextStyle(
+              color: Colors.black.withOpacity(0.6), fontWeight: FontWeight.w500, fontSize: 14, letterSpacing: 1 ,
+              fontFamily: "Libre"
+          ),
         ),
+        vSizedBox1,
         Container(
           height: 150,
-          color: Colors.white,
           child: ListView.builder(
             scrollDirection: Axis.horizontal,
             itemCount: _categories.length,
             itemBuilder: (context, index) {
-              return Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: ClayContainer(
-
-                  color: Colors.blueGrey,
-                  depth: 40,
-                  spread: 40,
-                  parentColor: Colors.white,
+              return Container(
+                width: 150,
+                child: Card(
+                  elevation: 4,
+                 shadowColor: Colors.grey.withOpacity(0.7),
+                 margin: EdgeInsets.symmetric(horizontal: 2, vertical: 2),
+                 color: Colors.white,
                   child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Image.asset(
-                        _category[index]['image'],
-                        height: 100,
-                        fit: BoxFit.scaleDown,
+                      Container(
+                        width: 100,
+                        padding: EdgeInsets.all(8),
+                        child: Image.asset(
+                          _category[index]['image'],
+                          fit: BoxFit.scaleDown,
+                        ),
                       ),
-                      Text(_category[index]['name']),
+                      Container(
+                          margin: EdgeInsets.only(left: 8),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Container(
+                                margin: EdgeInsets.only(right: 5),
+                                padding: EdgeInsets.symmetric(horizontal: 5,vertical: 2),
+                                decoration: BoxDecoration(
+                                  color: Colors.pink,
+                                  borderRadius: BorderRadius.circular(2),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.grey.withOpacity(0.2),
+                                      spreadRadius: 2,
+                                      blurRadius: 5,
+                                      offset: Offset(0, 3), // Controls the position of the shadow
+                                    ),
+                                  ],
+                                ),
+                                child: Text("27% off", style: TextStyle(fontWeight: FontWeight.w400, letterSpacing: 1,
+                                    fontFamily: "Libre",
+                                    fontSize: 12, color: Colors.white)),
+                              ),
+                              SizedBox(height: 5,),
+                              Text(_category[index]['name'], style: TextStyle(fontSize: 12, fontFamily: "Libre", color: Colors.black.withOpacity(0.6))),
+                            ],
+                          )),
                     ],
                   ),
                 ),
@@ -294,47 +447,83 @@ class _BrandWidgetState extends State<BrandWidget> {
             },
           ),
         ),
-        vSizedBox1,
+        vSizedBox2,
         Text(
           "All Products",
-          style: TextStyle(
-              color: Colors.black, fontWeight: FontWeight.w500, fontSize: 22),
+          style:
+          TextStyle(
+              color: Colors.black.withOpacity(0.6), fontWeight: FontWeight.w500, fontSize: 14, letterSpacing: 1 ,
+          fontFamily: "Libre"
+          ),
         ),
+        vSizedBox2,
+
         Container(
-            width: double.infinity,
-            color: Colors.red,
-            child: GridView.builder(
-              shrinkWrap: true,
-              physics: NeverScrollableScrollPhysics(),
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-                childAspectRatio: 0.7,
-              ),
-              itemCount: _category.length,
-              itemBuilder: (context, index) {
-                return Card(
+          width: double.infinity,
+          child: GridView.builder(
+            shrinkWrap: true,
+            physics: NeverScrollableScrollPhysics(),
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2,
+              childAspectRatio: 0.9,
+              crossAxisSpacing: 2,
+              mainAxisSpacing: 2,
+            ),
+            itemCount: _showAll ? _category.length : _visibleItemCount,
+            itemBuilder: (context, index) {
+              return Container(
+                color: Colors.white,
+                child: Card(
                   elevation: 10,
+                  margin: EdgeInsets.only(right: 3),
                   child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Image.asset(
-                        _category[index]['image'],
-                        fit: BoxFit.cover,
+                      Container(
+                        width: 100,
+                        child: Image.asset(
+                          _category[index]['image'],
+                          fit: BoxFit.fill,
+                        ),
                       ),
                       Padding(
                         padding: EdgeInsets.all(8),
                         child: Text(
                           _category[index]['name'],
                           style: TextStyle(
-                            fontWeight: FontWeight.bold,
+                            fontWeight: FontWeight.w500,
+                            fontSize: 12,
+                            fontFamily: "Libre",
+                            letterSpacing: 1,
+                            color: Colors.black.withOpacity(0.6)
                           ),
                         ),
                       ),
                     ],
                   ),
-                );
-              },
-            ))
+                ),
+              );
+            },
+          ),
+        ),
+        vSizedBox2,
+        if (!_showAll)
+          ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              primary: Colors.pinkAccent, // Accent pink color
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(20), // Rounded border
+              ),
+            ),
+            onPressed: () {
+              setState(() {
+                _showAll = true;
+              });
+            },
+            child: Text('See All'),
+          ),
+      ],
 
 /*
         SizedBox(
@@ -376,7 +565,6 @@ class _BrandWidgetState extends State<BrandWidget> {
               },
             ))
 */
-      ],
     );
   }
 }

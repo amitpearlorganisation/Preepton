@@ -2,7 +2,8 @@ import 'package:blurrycontainer/blurrycontainer.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-// import 'package:namastethailand/UserProfile/otpScreen.dart';
+import 'package:peerp_toon/presentation/widgets/dimensions.widget.dart';
+
 // import 'package:namastethailand/login.dart';
 
 // import '../Utility/logout.dart';
@@ -22,6 +23,10 @@ class _UserProfileState extends State<UserProfile> {
   String name = '';
   String phoneNumber = '';
   late String _email;
+   bool updateprofile = false;
+  TextEditingController _nameController = TextEditingController(text: 'amit');
+  TextEditingController _phoneController = TextEditingController(text: "8006429916");
+
 
 
   @override
@@ -81,7 +86,7 @@ class _UserProfileState extends State<UserProfile> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[300],
+      backgroundColor:Colors.white,
 
       body: SafeArea(
         child: Column(
@@ -100,7 +105,7 @@ class _UserProfileState extends State<UserProfile> {
                     child: ClipPath(
                       clipper: BottomClipper(),
                       child: Container(
-                        color: Colors.red,
+                        color: Colors.pinkAccent,
                         height: MediaQuery.of(context).size.height*0.35,
                       ),
                     )),
@@ -176,123 +181,253 @@ class _UserProfileState extends State<UserProfile> {
             ),
             SizedBox(height: 10,),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8),
+              padding: const EdgeInsets.symmetric(horizontal: 35),
               child: Column(
                 children: [
+                  updateprofile?
                   Container(
-                    height: 40,
-                    padding: EdgeInsets.symmetric(horizontal: 10),
+                    padding: EdgeInsets.symmetric(horizontal: 0),
                     decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20),
-                        color: Colors.blueGrey
+                    borderRadius: BorderRadius.circular(12),
+                    border: Border.all(
+                      color: Colors.pinkAccent
+                    ),
+                    color: Colors.white,
+
                     ),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        Icon(Icons.person,color: Colors.white,),
+                        Container(
+                            height:60,
+                            width: 50,
+                            decoration: BoxDecoration(
+                                color: Colors.pinkAccent.withOpacity(0.8),
+                                borderRadius: BorderRadius.circular(12)
+                            ),
+                            child: Icon(Icons.person,color: Colors.white,)),
                         SizedBox(width: 10,),
-                        Text("Amit",textAlign: TextAlign.center, style: GoogleFonts.ptSerif(
-                            fontSize: 17,
-                            color: Colors.white
+                        Expanded(child:
+                        TextFormField(
+                          controller: _nameController,
+                          decoration: InputDecoration(
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(10),
+                                borderSide: BorderSide.none, // No underline
+                              )
+                          ),
+                        )
+                        )
+
+                    ],
+                    ),
+                  ):
+                  BlurryContainer(
+                    height: 55,
+                    padding: EdgeInsets.symmetric(horizontal: 0),
+                    borderRadius: BorderRadius.circular(12),
+                    color: Color(0xffFDCEDF),
+                    elevation: 1,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Container(
+                            height:55,
+                            width: 50,
+                            decoration: BoxDecoration(
+                                color: Colors.white.withOpacity(0.8),
+                                borderRadius: BorderRadius.circular(12)
+                            ),
+                            child: Icon(Icons.person,color: Colors.pinkAccent,)),
+                        SizedBox(width: 10,),
+                        Text("Amit",textAlign: TextAlign.center, style: TextStyle(
+                            fontSize: 14,
+                            fontFamily: "Libre",
+                            letterSpacing: 1,
+                            color: Colors.blue
                         ),),
                       ],
                     ),
                   ),
                   SizedBox(height: 10,),
+                  updateprofile?
                   Container(
-                    height: 40,
-                    padding: EdgeInsets.symmetric(horizontal: 10),
+                    padding: EdgeInsets.symmetric(horizontal: 0),
                     decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20),
-                        color: Colors.blueGrey
+                      borderRadius: BorderRadius.circular(12),
+                      border: Border.all(
+                          color: Colors.pinkAccent
+                      ),
+                      color: Colors.white,
+
                     ),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        Icon(Icons.email,color: Colors.white,),
+                        Container(
+                            height:60,
+                            width: 50,
+                            decoration: BoxDecoration(
+                                color: Colors.pinkAccent.withOpacity(0.8),
+                                borderRadius: BorderRadius.circular(12)
+                            ),
+                            child: Icon(Icons.email,color: Colors.white,)),
                         SizedBox(width: 10,),
-                        Text("Amit@gmail.com", style: GoogleFonts.ptSerif(
-                            fontSize: 17,
-                            color: Colors.white
-                        ),),
-                        IconButton(
-                          icon: Icon(Icons.edit),
-                          color: Colors.white,
-                          onPressed: () {
-                            showDialog(
-                              context: context,
-                              builder: (context) {
-                                return AlertDialog(
-                                  title: Text('Enter your email'),
-                                  content: TextFormField(
-                                    controller: _emailController,
-
-                                    decoration: InputDecoration(
-                                      hintText: 'Email',
-                                    ),
-
-                                  ),
-                                  actions: [
-                                    TextButton(
-                                      child: Text('Next'),
-                                      onPressed: () {
-                                        // Navigator.pushReplacement(
-                                        //   context,
-                                        //   MaterialPageRoute(builder: (context) => OtpScreen(email: _emailController.text.toString())),
-                                        // );
-                                      },
-                                    ),
-                                  ],
-                                );
-                              },
-                            );
-                          },
+                        Expanded(child:
+                        TextFormField(
+                          controller: _emailController,
+                          decoration: InputDecoration(
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(10),
+                                borderSide: BorderSide.none, // No underline
+                              )
+                          ),
+                        )
                         )
 
                       ],
                     ),
-
+                  ):
+                  BlurryContainer(
+                    height: 55,
+                    padding: EdgeInsets.symmetric(horizontal: 0),
+                    borderRadius: BorderRadius.circular(12),
+                    color: Color(0xffFDCEDF),
+                    elevation: 1,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Container(
+                            height:55,
+                            width: 50,
+                            decoration: BoxDecoration(
+                                color: Colors.white.withOpacity(0.8),
+                                borderRadius: BorderRadius.circular(12)
+                            ),
+                            child: Icon(Icons.email,color: Colors.pinkAccent,)),
+                        SizedBox(width: 10,),
+                        Text("amitpearl@gmail.com",textAlign: TextAlign.center, style: TextStyle(
+                            fontSize: 14,
+                            fontFamily: "Libre",
+                            letterSpacing: 1,
+                            color: Colors.blue
+                        ),),
+                      ],
+                    ),
                   ),
                   SizedBox(height: 10,),
+                  updateprofile?
                   Container(
-                    height: 40,
-                    padding: EdgeInsets.symmetric(horizontal: 10),
+                    padding: EdgeInsets.symmetric(horizontal: 0),
                     decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20),
-                        color: Colors.blueGrey
+                      borderRadius: BorderRadius.circular(12),
+                      border: Border.all(
+                          color: Colors.pinkAccent
+                      ),
+                      color: Colors.white,
+
                     ),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        Icon(Icons.phone,color: Colors.white,),
+                        Container(
+                            height:60,
+                            width: 50,
+                            decoration: BoxDecoration(
+                                color: Colors.pinkAccent.withOpacity(0.8),
+                                borderRadius: BorderRadius.circular(12)
+                            ),
+                            child: Icon(Icons.phone,color: Colors.white,)),
                         SizedBox(width: 10,),
-                        Text("9185698745",textAlign: TextAlign.center, style: GoogleFonts.ptSerif(
-                            fontSize: 17,
-                            color: Colors.white
-                        ),),
+                        Expanded(child:
+                        TextFormField(
+                          controller: _phoneController,
+                          decoration: InputDecoration(
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(10),
+                                borderSide: BorderSide.none, // No underline
+                              )
+                          ),
+                        )
+                        )
 
                       ],
                     ),
+                  ):
+
+                  BlurryContainer(
+                    height: 55,
+                    padding: EdgeInsets.symmetric(horizontal: 0),
+                    borderRadius: BorderRadius.circular(12),
+                    color: Color(0xffFDCEDF),
+                    elevation: 1,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Container(
+                            height:55,
+                            width: 50,
+                            decoration: BoxDecoration(
+                                color: Colors.white.withOpacity(0.8),
+                                borderRadius: BorderRadius.circular(12)
+                            ),
+                            child: Icon(Icons.phone,color: Colors.pinkAccent,)),
+                        SizedBox(width: 10,),
+                        Text("979815555",textAlign: TextAlign.center, style: TextStyle(
+                            fontSize: 14,
+                            fontFamily: "Libre",
+                            letterSpacing: 1,
+                            color: Colors.blue
+                        ),),
+                      ],
+                    ),
                   ),
-                  SizedBox(height: 15,),
+                  vSizedBox2,
+                  updateprofile?
                   InkWell(
                     onTap: (){
-                      _showUpdateDialog();
+                      setState(() {
+                        updateprofile=false;
+                      });
                     },
                     child: BlurryContainer(
-                      elevation: 20,
+                      elevation: 3,
                       width: double.infinity,
-                      height: 50,
-                      color: Colors.red,
+                      height: 55,
+                      color: Colors.pinkAccent,
                       child: Center(
-                        child: Text("UPDATE",textAlign: TextAlign.center, style: GoogleFonts.ptSerif(
-                            fontSize: 17,
+                        child: Text("UPDATE",textAlign: TextAlign.center, style: TextStyle(
+                            fontSize: 16,
                             color: Colors.white,
-                            fontWeight: FontWeight.w600,
-                            letterSpacing: 1
+                            fontWeight: FontWeight.w500,
+                            letterSpacing: 1,
+                          fontFamily: "Libre"
+                        ),),
+                      ), ),
+                  ):InkWell(
+                    onTap: (){
+                      setState(() {
+                        updateprofile=true
+
+                        ;
+                      });
+                    },
+                    child: BlurryContainer(
+                      elevation: 3,
+                      width: double.infinity,
+                      height: 55,
+                      color: Colors.pinkAccent,
+                      child: Center(
+                        child: Text("Edit",textAlign: TextAlign.center, style: TextStyle(
+                            fontSize: 16,
+                            color: Colors.white,
+                            fontWeight: FontWeight.w500,
+                            letterSpacing: 1,
+                            fontFamily: "Libre"
                         ),),
                       ), ),
                   )
+
                 ],
               ),
             )

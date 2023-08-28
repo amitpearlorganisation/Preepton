@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 
 
@@ -8,6 +9,7 @@ import '../../../core/notifiers/authentication.notifer.dart';
 import '../../../core/notifiers/theme.notifier.dart';
 import '../../widgets/custom.text.field.dart';
 import '../../widgets/dimensions.widget.dart';
+import '../loginScreen/OtpScreen.dart';
 import 'Widgets/forgot.password.widget.dart';
 
 // bool isEmail(String input) => EmailValidator.validate(input);
@@ -27,16 +29,6 @@ class ForgotPasswordScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    _sendOTPForForgotPassword() {
-      if (_formKey.currentState!.validate()) {
-        var authNotifier =
-            Provider.of<AuthenticationNotifier>(context, listen: false);
-        authNotifier.forgotPassword(
-          context: context,
-          email: userForgotPassEmailController.text,
-        );
-      }
-    }
 
     ThemeNotifier _themeNotifier = Provider.of<ThemeNotifier>(context);
     var themeFlag = _themeNotifier.darkTheme;
@@ -84,8 +76,9 @@ class ForgotPasswordScreen extends StatelessWidget {
                       borderRadius: BorderRadius.circular(8),
                     ),
                     onPressed: () async {
-                      _sendOTPForForgotPassword();
-                      // Navigator.push(
+                      if(userForgotPassEmailController.toString().isNotEmpty){
+                        Navigator.push(context, MaterialPageRoute(builder: (context)=>OtpScreen()));
+                      }                      // Navigator.push(
                       //     context,
                       //     MaterialPageRoute(
                       //         builder: (context) => HomeScreen()));

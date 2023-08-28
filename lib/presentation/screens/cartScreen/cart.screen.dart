@@ -6,6 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:peerp_toon/Cubit/get_cart_cubit.dart';
 import 'package:peerp_toon/app/constants/app.colors.dart';
 import 'package:peerp_toon/presentation/screens/DeliveryAddress/divileryDailogBox.dart';
+import 'package:peerp_toon/presentation/widgets/dimensions.widget.dart';
 
 import '../GateWayPayment/appInPurchase.dart';
 import '../GateWayPayment/paypal.dart';
@@ -43,17 +44,17 @@ class _AddToCartState extends State<AddToCart> {
     ),
     Product(
       name: 'Product 3',
-      image: 'assets/images/shoes/shoes2.jpg',
+      image: 'assets/images/shoes/s1.png',
       price: 19.99,
     ),
     Product(
       name: 'Product 1',
-      image: 'assets/images/shoes/shoes1.jpg',
+      image: 'assets/images/shoes/s2.png',
       price: 9.99,
     ),
     Product(
       name: 'Product 1',
-      image: 'assets/images/shoes/shoes3.jpg',
+      image: 'assets/images/shoes/s3.png',
       price: 9.99,
     ),
     Product(
@@ -104,7 +105,9 @@ class _AddToCartState extends State<AddToCart> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Add to cart'),
+        backgroundColor: Colors.pink,
       ),
+      backgroundColor: Colors.white.withOpacity(0.5),
       body: Column(
         children: [
           Expanded(
@@ -134,16 +137,20 @@ class _AddToCartState extends State<AddToCart> {
                           ),
 
                           child: Card(
+                            elevation: 1,
+                            margin: EdgeInsets.symmetric(horizontal: 10, vertical: 3),
+                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
                             child: Row(
                               children: [
-                                Padding(
-                                  padding: EdgeInsets.all(8.0),
+                                Container(
+                                  padding: EdgeInsets.all(10),
+                                  height: 120,
+                                  width: 130,
                                   child: Image.asset(
                                     _products[index].image,
-                                    height: 100.0,
-                                    width: 100.0,
                                   ),
                                 ),
+                                SizedBox(width: 15,),
                                 Expanded(
                                   child: Column(
                                     crossAxisAlignment: CrossAxisAlignment
@@ -152,14 +159,20 @@ class _AddToCartState extends State<AddToCart> {
                                       Text(
                                         _products[index].name,
                                         style: TextStyle(
-                                          fontSize: 20.0,
-                                          fontWeight: FontWeight.bold,
+                                          fontSize: 12.0,
+                                          fontWeight: FontWeight.w500,
+                                          color: Colors.black.withOpacity(0.6),
+                                          fontFamily: "Libre"
                                         ),
                                       ),
+                                      vSizedBox1,
                                       Text(
                                         'Price: \$${_products[index]
                                             .price}',
-                                        style: TextStyle(fontSize: 16.0),
+                                        style: TextStyle(fontSize: 12.0,
+                                        color: Colors.black.withOpacity(0.5),
+                                          fontFamily: "Libre"
+                                        ),
                                       ),
                                     ],
                                   ),
@@ -195,11 +208,12 @@ class _AddToCartState extends State<AddToCart> {
               children: [
                 Text(
                   'Total Products: ${_totalQuantity()}',
-                  style: TextStyle(fontSize: 16.0),
+                  style: TextStyle(fontSize: 14.0,fontFamily: "Libre", letterSpacing: 1, color: Colors.black.withOpacity(0.5)),
                 ),
                 Text(
                   'Total Price: \$${_totalPrice().toStringAsFixed(2)}',
-                  style: TextStyle(fontSize: 16.0),
+                  style: TextStyle(fontSize: 14.0,
+                      fontFamily: "Libre", letterSpacing: 1, color: Colors.black.withOpacity(0.5)),
                 ),
               ],
             ),
@@ -207,12 +221,23 @@ class _AddToCartState extends State<AddToCart> {
         ],
       ),
       bottomNavigationBar: Container(
-        padding: EdgeInsets.all(16.0),
+        padding: EdgeInsets.all(8.0),
         child: Expanded(
-          child: TextButton(
+          child: ElevatedButton(
             style: ButtonStyle(
-              backgroundColor: MaterialStateProperty.all(AppColors.buttoColor),
+              padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
+                EdgeInsets.symmetric(vertical: 12), // Add padding
+              ),
+              elevation: MaterialStateProperty.all(10), // Add elevation
+              shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(20), // Add rounded border
+                ),
+              ),
+              backgroundColor: MaterialStateProperty.all(Colors.pink),
               foregroundColor: MaterialStateProperty.all(Colors.white),
+              shadowColor: MaterialStateProperty.all(Colors.grey), // Add shadow color
+
             ),
             onPressed: () {
               if (io.Platform.isMacOS) {
@@ -242,7 +267,7 @@ class _AddToCartState extends State<AddToCart> {
             },
 
 
-            child: Text('Check Out'),
+            child: Text('Check Out', style: TextStyle(fontFamily: "Libre", letterSpacing: 1,),),
           ),
         ),
       ),

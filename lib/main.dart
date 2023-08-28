@@ -1,6 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:peerp_toon/Bloc/product_bloc.dart';
 import 'package:peerp_toon/app/Repository/produt_repo.dart';
 import 'package:provider/provider.dart';
@@ -52,6 +53,7 @@ class Core extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         onGenerateRoute: AppRouter.generateRoute,
         initialRoute: AppRouter.splashRoute,
+        builder: EasyLoading.init(),
       ),
     );
   }

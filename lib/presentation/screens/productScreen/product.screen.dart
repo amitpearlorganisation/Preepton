@@ -1,3 +1,4 @@
+import 'package:blurrycontainer/blurrycontainer.dart';
 import 'package:cache_manager/core/cache_manager_utils.dart';
 import 'package:cache_manager/core/write_cache_service.dart';
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
@@ -9,7 +10,7 @@ import 'package:peerp_toon/presentation/screens/productScreen/widgets/brands.wid
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../../../SellerApp/deshbord/contactus.dart';
+import '../../../SellerApp/dashbord/contactus.dart';
 import '../../../app/constants/ProductAPi.dart';
 import '../../../app/constants/app.assets.dart';
 import '../../../app/constants/app.colors.dart';
@@ -89,15 +90,13 @@ class _ProductScreenState extends State<ProductScreen> {
 
     return SafeArea(
         child: Scaffold(
-            backgroundColor:
-                themeFlag ? AppColors.mirage : AppColors.creamColor,
+            backgroundColor: Colors.white,
             appBar: AppBar(
               centerTitle: true,
               elevation: 0.0,
-              backgroundColor:
-                  themeFlag ? AppColors.mirage : AppColors.creamColor,
+              backgroundColor:Colors.pinkAccent,
               iconTheme: IconThemeData(
-                  color: themeFlag ? AppColors.creamColor : AppColors.mirage),
+                  color: Colors.white),
               actions: [
                 Icon(Icons.shopping_bag),
                 SizedBox(
@@ -106,8 +105,7 @@ class _ProductScreenState extends State<ProductScreen> {
               ],
             ),
             drawer: Drawer(
-              backgroundColor:
-                  themeFlag ? AppColors.mirage : AppColors.creamColor,
+              backgroundColor:Color(0xffFDCEDF),
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.only(
                       topRight: Radius.circular(20),
@@ -117,9 +115,7 @@ class _ProductScreenState extends State<ProductScreen> {
                 children: <Widget>[
                   DrawerHeader(
                     decoration: BoxDecoration(
-                        color: themeFlag
-                            ? AppColors.mirage
-                            : AppColors.creamColor),
+                        color:Colors.pinkAccent),
                     child: Column(
                       children: [
                         ClipOval(
@@ -128,21 +124,26 @@ class _ProductScreenState extends State<ProductScreen> {
                         SizedBox(height: 5,),
                         Text(
                           "Govind lodhi",
-                          style: GoogleFonts.poppins(
-                              color: Colors.black, fontSize: 12, letterSpacing: 2),
+                          style: TextStyle(
+                              color: Colors.white, fontSize: 12, letterSpacing: 1, wordSpacing: 1,
+                            fontFamily: "Libre"
+                          ),
                         ),
+                        vSizedBox1,
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Icon(
                               Icons.email,
-                              color: Colors.red,
+                              color: Colors.white,
                             ),
                             SizedBox(width: 5,),
                             Text(
                               "govind@gmail.com",
-                              style: GoogleFonts.poppins(
-                                  color: Colors.black, fontSize: 10, letterSpacing: 2),
+                              style: TextStyle(
+                                  color: Colors.white, fontSize: 10, letterSpacing: 1,wordSpacing: 1,
+                              fontFamily: "Libre"
+                              ),
                             ),
                           ],
                         )
@@ -152,10 +153,8 @@ class _ProductScreenState extends State<ProductScreen> {
                   ListTile(
                     leading: Icon(
                       Icons.account_circle_rounded,
-                      color:
-                          themeFlag ? AppColors.creamColor : AppColors.mirage,
-                    ),
-                    title: const Text('Profile '),
+                      color: Colors.pinkAccent),
+                    title: const Text('Profile ', style: TextStyle(fontFamily: "Libre", fontSize: 14, color: Colors.pinkAccent,letterSpacing: 1),),
                     onTap: () {
                       Navigator.push(
                           context,
@@ -165,15 +164,14 @@ class _ProductScreenState extends State<ProductScreen> {
                   ),
                   ListTile(
                     leading: Icon(EvaIcons.shoppingCart,
-                        color: themeFlag
-                            ? AppColors.creamColor
-                            : AppColors.mirage),
+                        color:Colors.pinkAccent),
                     title: Text(
                       'Cart',
                       style: TextStyle(
-                          color: themeFlag
-                              ? AppColors.creamColor
-                              : AppColors.mirage),
+                          color: Colors.pinkAccent,
+                        fontFamily: "Libre",
+                        letterSpacing: 1
+                      ),
                     ),
                     onTap: () {
                       Navigator.push(
@@ -185,14 +183,15 @@ class _ProductScreenState extends State<ProductScreen> {
                   ListTile(
                     leading: Icon(
                       Icons.note_alt_rounded,
-                      color:
-                          themeFlag ? AppColors.creamColor : AppColors.mirage,
+                      color:Colors.pinkAccent,
                     ),
                     title: Text('Blog',
                         style: TextStyle(
-                            color: themeFlag
-                                ? AppColors.creamColor
-                                : AppColors.mirage)),
+                        color: Colors.pinkAccent,
+                        fontFamily: "Libre",
+                        letterSpacing: 1
+                    ),
+                    ),
                     onTap: () {
                       Navigator.push(
                           context,
@@ -202,14 +201,17 @@ class _ProductScreenState extends State<ProductScreen> {
                   ListTile(
                     leading: Icon(
                       Icons.sell,
-                      color:
-                          themeFlag ? AppColors.creamColor : AppColors.mirage,
+                      color: Colors.pinkAccent,
                     ),
                     title: Text('Become Seller',
-                        style: TextStyle(
-                            color: themeFlag
-                                ? AppColors.creamColor
-                                : AppColors.mirage)),
+                      style: TextStyle(
+                          color: Colors.pinkAccent,
+                          fontFamily: "Libre",
+                          letterSpacing: 1
+                      ),
+
+
+                    ),
                     onTap: () {
                       Navigator.push(
                         context,
@@ -221,14 +223,16 @@ class _ProductScreenState extends State<ProductScreen> {
                   ListTile(
                     leading: Icon(
                       Icons.telegram,
-                      color:
-                          themeFlag ? AppColors.creamColor : AppColors.mirage,
+                      color: Colors.pinkAccent,
                     ),
                     title: Text('Contact Us',
-                        style: TextStyle(
-                            color: themeFlag
-                                ? AppColors.creamColor
-                                : AppColors.mirage)),
+                      style: TextStyle(
+                          color: Colors.pinkAccent,
+                          fontFamily: "Libre",
+                          letterSpacing: 1
+                      ),
+
+                    ),
                     onTap: () {
                       Navigator.push(
                           context,
@@ -239,14 +243,15 @@ class _ProductScreenState extends State<ProductScreen> {
                   ListTile(
                     leading: Icon(
                       Icons.add_box,
-                      color:
-                      themeFlag ? AppColors.creamColor : AppColors.mirage,
+                      color:Colors.pinkAccent
                     ),
                     title: Text('MyOrder',
-                        style: TextStyle(
-                            color: themeFlag
-                                ? AppColors.creamColor
-                                : AppColors.mirage)),
+                      style: TextStyle(
+                          color: Colors.pinkAccent,
+                          fontFamily: "Libre",
+                          letterSpacing: 1
+                      ),
+                    ),
                     onTap: () {
                       Navigator.push(
                           context,
@@ -256,15 +261,14 @@ class _ProductScreenState extends State<ProductScreen> {
 
                   ListTile(
                     leading: Icon(EvaIcons.logOut,
-                        color: themeFlag
-                            ? AppColors.creamColor
-                            : AppColors.mirage),
+                        color:Colors.pinkAccent),
                     title: Text(
                       'Logout',
                       style: TextStyle(
-                          color: themeFlag
-                              ? AppColors.creamColor
-                              : AppColors.mirage),
+                          color: Colors.pinkAccent,
+                          fontFamily: "Libre",
+                          letterSpacing: 1
+                      ),
                     ),
                     onTap: () {
                       Navigator.push(
@@ -276,14 +280,15 @@ class _ProductScreenState extends State<ProductScreen> {
                   ListTile(
                     leading: Icon(
                       Icons.place,
-                      color:
-                      themeFlag ? AppColors.creamColor : AppColors.mirage,
+                      color:Colors.pinkAccent
                     ),
                     title: Text('Address',
-                        style: TextStyle(
-                            color: themeFlag
-                                ? AppColors.creamColor
-                                : AppColors.mirage)),
+                      style: TextStyle(
+                          color: Colors.pinkAccent,
+                          fontFamily: "Libre",
+                          letterSpacing: 1
+                      ),
+                    ),
                     onTap: () {
                       Navigator.push(
                           context,
@@ -301,215 +306,20 @@ class _ProductScreenState extends State<ProductScreen> {
                   Container(
                       padding: EdgeInsets.only(left: 20),
                       width: double.infinity,
-                      height: 536,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Spacer(),
-                          Text(
-                            "Fashion\nsale",
-                            textAlign: TextAlign.start,
-                            style: TextStyle(fontSize: 48, color: Colors.white),
-                          ),
-                          MaterialButton(
-                            onPressed: () {},
-                            child: Container(
-                              width: 160,
-                              height: 36,
-                              decoration: BoxDecoration(
-                                  color: Colors.red,
-                                  borderRadius: BorderRadius.circular(20)),
-                              child: Center(
-                                child: Text(
-                                  "Check",
-                                  style: TextStyle(
-                                      fontSize: 14, color: Colors.white),
-                                ),
-                              ),
-                            ),
-                          ),
-                          SizedBox(
-                            height: 32,
-                          )
-                        ],
-                      ),
+                      height: 400,
                       decoration: new BoxDecoration(
                           image: new DecorationImage(
-                        image: new AssetImage("assets/images/bigbanner.png"),
+                        image: new AssetImage("assets/images/fashion.jpg"),
                         fit: BoxFit.fill,
                       ))),
                   Padding(
-                    padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
+                    padding: const EdgeInsets.fromLTRB(2, 5, 2, 5),
                     child: Column(
                       children: <Widget>[
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             const BrandWidget(),
-/*
-                            SizedBox(
-                              height: 200,
-                              width: MediaQuery.of(context).size.width,
-                              child: Consumer<ProductNotifier>(
-                                builder: (context, notifier, _) {
-                                  return FutureBuilder(
-                                    future: ProductApi.productList(),
-                                    builder: (context, snapshot) {
-                                      if (snapshot.connectionState ==
-                                          ConnectionState.waiting) {
-                                        return ShimmerEffects.loadShimmer(
-                                            context: context);
-                                      } else if (!snapshot.hasData) {
-                                        return Center(
-                                          child: Text(
-                                            'Some Error Occurred...',
-                                            style:
-                                                CustomTextWidget.bodyTextUltra(
-                                              color: themeFlag
-                                                  ? AppColors.creamColor
-                                                  : AppColors.mirage,
-                                            ),
-                                          ),
-                                        );
-                                      } else {
-                                        return ListView.builder(
-                                          physics: const ScrollPhysics(),
-                                          shrinkWrap: true,
-                                          itemCount:
-                                              snapshot.data!.products!.length,
-                                          scrollDirection: Axis.horizontal,
-                                          itemBuilder: (context, index) {
-                                            return GestureDetector(
-                                              onTap: () {
-                                                Navigator.of(context).pushNamed(
-                                                  AppRouter.prodDetailRoute,
-                                                  arguments: ProductDetailsArgs(
-                                                      id: snapshot.data!
-                                                          .products![index].id
-                                                          .toString()),
-                                                );
-                                              },
-                                              child: Padding(
-                                                padding:
-                                                    const EdgeInsets.symmetric(
-                                                        horizontal: 10),
-                                                child: Card(
-                                                  shape: RoundedRectangleBorder(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            10),
-                                                    side: BorderSide(
-                                                      color: Colors.grey
-                                                          .withOpacity(0.2),
-                                                      width: 1,
-                                                    ),
-                                                  ),
-                                                  elevation: 6,
-                                                  color: themeFlag
-                                                      ? AppColors.mirage
-                                                      : AppColors.creamColor,
-                                                  child: Column(
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment.start,
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
-                                                    children: [
-                                                      Hero(
-                                                        tag: Key(snapshot.data!
-                                                            .products![index].id
-                                                            .toString()),
-                                                        child: SizedBox(
-                                                          height: MediaQuery.of(
-                                                                      context)
-                                                                  .size
-                                                                  .height *
-                                                              0.15,
-                                                          width: MediaQuery.of(
-                                                                      context)
-                                                                  .size
-                                                                  .height *
-                                                              0.165,
-                                                          child: Image.network(
-                                                            snapshot
-                                                                .data!
-                                                                .products![
-                                                                    index]
-                                                                .productImage
-                                                                .toString(),
-                                                            fit: BoxFit
-                                                                .scaleDown,
-                                                          ),
-                                                        ),
-                                                      ),
-                                                      vSizedBox1,
-                                                      Container(
-                                                        margin: const EdgeInsets
-                                                                .fromLTRB(
-                                                            8, 8, 8, 8),
-                                                        child: Column(
-                                                          mainAxisAlignment:
-                                                              MainAxisAlignment
-                                                                  .start,
-                                                          crossAxisAlignment:
-                                                              CrossAxisAlignment
-                                                                  .start,
-                                                          children: [
-                                                            Text(
-                                                              snapshot
-                                                                  .data!
-                                                                  .products![
-                                                                      index]
-                                                                  .productName
-                                                                  .toString(),
-                                                              style:
-                                                                  CustomTextWidget
-                                                                      .bodyText3(
-                                                                color: themeFlag
-                                                                    ? AppColors
-                                                                        .creamColor
-                                                                    : AppColors
-                                                                        .mirage,
-                                                              ),
-                                                              maxLines: 2,
-                                                              overflow:
-                                                                  TextOverflow
-                                                                      .ellipsis,
-                                                            ),
-                                                            Text(
-                                                              '₹  ${snapshot.data!.products![index].price.toString()}',
-                                                              style:
-                                                                  CustomTextWidget
-                                                                      .bodyText3(
-                                                                color: themeFlag
-                                                                    ? AppColors
-                                                                        .creamColor
-                                                                    : AppColors
-                                                                        .mirage,
-                                                              ),
-                                                              maxLines: 2,
-                                                              overflow:
-                                                                  TextOverflow
-                                                                      .ellipsis,
-                                                            ),
-                                                          ],
-                                                        ),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ),
-                                              ),
-                                            );
-                                          },
-                                        );
-                                      }
-                                    },
-                                  );
-                                },
-                              ),
-                            )
-*/
                           ],
                         )
                       ],
