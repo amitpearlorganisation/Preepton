@@ -6,7 +6,7 @@ abstract class LoginEvent extends Equatable {
 class LoginUIEvent extends LoginEvent{
   String email;
   String password;
-  LoginUIEvent({required String this.email, required String this.password});
+  LoginUIEvent({required  this.email, required  this.password});
   @override
   List<Object?> get props =>[email, password];
 

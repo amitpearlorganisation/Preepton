@@ -111,6 +111,7 @@ class _AddToCartState extends State<AddToCart> {
       body: Column(
         children: [
           Expanded(
+            flex: 3,
             child: ListView.builder(
               itemCount: _products.length,
               itemBuilder: (BuildContext context, int index) {
@@ -222,54 +223,54 @@ class _AddToCartState extends State<AddToCart> {
       ),
       bottomNavigationBar: Container(
         padding: EdgeInsets.all(8.0),
-        child: Expanded(
-          child: ElevatedButton(
-            style: ButtonStyle(
-              padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
-                EdgeInsets.symmetric(vertical: 12), // Add padding
-              ),
-              elevation: MaterialStateProperty.all(10), // Add elevation
-              shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(20), // Add rounded border
+        child:
+             ElevatedButton(
+              style: ButtonStyle(
+                padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
+                  EdgeInsets.symmetric(vertical: 12), // Add padding
                 ),
+                elevation: MaterialStateProperty.all(10), // Add elevation
+                shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                  RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20), // Add rounded border
+                  ),
+                ),
+                backgroundColor: MaterialStateProperty.all(Colors.pink),
+                foregroundColor: MaterialStateProperty.all(Colors.white),
+                shadowColor: MaterialStateProperty.all(Colors.grey), // Add shadow color
+
               ),
-              backgroundColor: MaterialStateProperty.all(Colors.pink),
-              foregroundColor: MaterialStateProperty.all(Colors.white),
-              shadowColor: MaterialStateProperty.all(Colors.grey), // Add shadow color
-
-            ),
-            onPressed: () {
-              if (io.Platform.isMacOS) {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => AppInPurchaseScreen(),
-                  ),
-                );
-              } else {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => AddressDialog(),
-                  ),
-                );
-                // Navigator.push(
-                //   context,
-                //   MaterialPageRoute(
-                //     builder: (context) => PayPalScreen(
-                //       totalPrice: _totalPrice(),
-                //       totalProducts:_totalQuantity(), title: 'Peeptoon',
-                //     ),
-                //   ),
-                // );
-              }
-            },
+              onPressed: () {
+                if (io.Platform.isMacOS) {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => AppInPurchaseScreen(),
+                    ),
+                  );
+                } else {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => AddressDialog(),
+                    ),
+                  );
+                  // Navigator.push(
+                  //   context,
+                  //   MaterialPageRoute(
+                  //     builder: (context) => PayPalScreen(
+                  //       totalPrice: _totalPrice(),
+                  //       totalProducts:_totalQuantity(), title: 'Peeptoon',
+                  //     ),
+                  //   ),
+                  // );
+                }
+              },
 
 
-            child: Text('Check Out', style: TextStyle(fontFamily: "Libre", letterSpacing: 1,),),
-          ),
-        ),
+              child: Text('Check Out', style: TextStyle(fontFamily: "Libre", letterSpacing: 1,),),
+            )
+         ,
       ),
     );
   }

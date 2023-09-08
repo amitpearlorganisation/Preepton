@@ -16,7 +16,7 @@ final List<SalomonBottomBarItem> bottomNavBarIcons = [
   SalomonBottomBarItem(
     icon: const Icon(Icons.home),
     title: const Text("Home"),
-    selectedColor: Colors.pinkAccent,
+    selectedColor: Colors.purple,
   ),
 
   /// Search
@@ -42,7 +42,7 @@ final List<SalomonBottomBarItem> bottomNavBarIcons = [
 final screens = [
   const ProductScreen(),
   const SearchScreen(),
-        AddToCart(),
+  AddToCart(),
   // OrderTrackingScreen(),
   const UserProfile(),
 ];
@@ -63,16 +63,16 @@ class _HomeScreenState extends State<HomeScreen> {
     var themeFlag = _themeNotifier.darkTheme;
     return
       Scaffold(
-      backgroundColor: themeFlag ? AppColors.mirage : AppColors.creamColor,
-      body: screens[_currentIndex],
-      bottomNavigationBar: SalomonBottomBar(
-        selectedItemColor:
-            themeFlag ? AppColors.rawSienna : const Color(0xff4B7191),
-        unselectedItemColor: themeFlag ? Colors.white : const Color(0xff777777),
-        currentIndex: _currentIndex,
-        onTap: (i) => setState(() => _currentIndex = i),
-        items: bottomNavBarIcons,
-      ),
-    );
+        backgroundColor: themeFlag ? AppColors.mirage : AppColors.creamColor,
+        body: screens[_currentIndex],
+        bottomNavigationBar: SalomonBottomBar(
+          selectedItemColor:
+          themeFlag ? AppColors.rawSienna : const Color(0xff4B7191),
+          unselectedItemColor: themeFlag ? Colors.white : const Color(0xff777777),
+          currentIndex: _currentIndex,
+          onTap: (i) => setState(() => _currentIndex = i),
+          items: bottomNavBarIcons,
+        ),
+      );
   }
 }

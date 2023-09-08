@@ -14,7 +14,7 @@ class CustomTextField {
       keyboardType: TextInputType.visiblePassword,
       style: const TextStyle(
         color: Colors.black,
-        fontFamily: AppFonts.contax,
+        fontFamily: "Libre",
       ),
       onChanged: onChanged,
       controller: textEditingController,
@@ -33,7 +33,7 @@ class CustomTextField {
             Radius.circular(12),
           ),
           borderSide: BorderSide(
-            width: 1.5,
+            width: 1,color: Colors.pinkAccent
           ),
         ),
         focusedBorder: OutlineInputBorder(

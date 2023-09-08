@@ -2,8 +2,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:hive/hive.dart';
+import 'package:hive_flutter/adapters.dart';
 import 'package:peerp_toon/Bloc/product_bloc.dart';
 import 'package:peerp_toon/app/Repository/produt_repo.dart';
+import 'package:peerp_toon/core/service/locator.dart';
+import 'package:peerp_toon/presentation/screens/productScreen/pagination_bloc/transation_bloc.dart';
 import 'package:provider/provider.dart';
 import 'app/Bloc_Observer/bloc_observer.dart';
 import 'app/constants/app.theme.dart';
@@ -13,9 +17,12 @@ import 'core/notifiers/theme.notifier.dart';
 import 'web_url/configure_nonweb.dart'
 if (dart.library.html) 'web_url/configure_web.dart';
 
-void main() {
+void main() async{
   WidgetsFlutterBinding.ensureInitialized();
   Bloc.observer = MyBlocObserver();
+  locator();
+  await Hive.initFlutter();
+  await Hive.openBox('hive_local_db');
   runApp(
       MultiRepositoryProvider(
           providers: [
@@ -44,7 +51,10 @@ class Core extends StatelessWidget {
     return MultiBlocProvider(
       providers:[
         BlocProvider(create:
-        (context)=> ProductBloc(ProductsRepo()))
+        (context)=> ProductBloc(ProductsRepo())),
+        BlocProvider(create:
+        (context)=> TransationBloc(TransactionRepo())
+        )
       ],
       child: MaterialApp(
         title: 'Peeptoon',
@@ -54,6 +64,7 @@ class Core extends StatelessWidget {
         onGenerateRoute: AppRouter.generateRoute,
         initialRoute: AppRouter.splashRoute,
         builder: EasyLoading.init(),
+        // home: Bottombar(),
       ),
     );
   }

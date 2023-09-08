@@ -3,11 +3,14 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:lazy_loading_list/lazy_loading_list.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:peerp_toon/Bloc/product_bloc.dart';
 import 'package:peerp_toon/app/models/product_models.dart';
 import 'package:peerp_toon/presentation/screens/productCategory/productCategory.dart';
 import 'package:provider/provider.dart';
+import '../../../../app/Repository/produt_repo.dart';
 import '../../../../app/constants/app.assets.dart';
 import '../../../../app/constants/app.colors.dart';
 import '../../../../app/routes/routes_imports.dart';
@@ -16,6 +19,7 @@ import '../../../../core/notifiers/theme.notifier.dart';
 import '../../../widgets/custom.text.style.dart';
 import '../../../widgets/dimensions.widget.dart';
 import '../../categoryScreen/category_imports.dart';
+import '../pagination_bloc/transation_bloc.dart';
 
 class BrandWidget extends StatefulWidget {
   const BrandWidget({Key? key}) : super(key: key);
@@ -24,6 +28,7 @@ class BrandWidget extends StatefulWidget {
   State<BrandWidget> createState() => _BrandWidgetState();
 }
 bool isResponseSaved = false;
+bool transactionSaved = false;
 
 class _BrandWidgetState extends State<BrandWidget> {
   List<Map<String, dynamic>> _category = List.generate(
@@ -43,9 +48,13 @@ class _BrandWidgetState extends State<BrandWidget> {
     context.read<ProductBloc>().add(ProductLoadedEvent());
     isResponseSaved = true;
     }
+    if(!transactionSaved){
+      context.read<TransationBloc>().add(TransactionLoadedEvent(mobileNo: "1234567891", pageNo: "1"));
+      isResponseSaved = true;
+    }
     super.initState();
   }
-
+  TransationBloc transationBloc = TransationBloc(TransactionRepo());
   Widget build(BuildContext context) {
     ThemeNotifier _themeNotifier = Provider.of<ThemeNotifier>(context);
     var themeFlag = _themeNotifier.darkTheme;
@@ -95,46 +104,6 @@ class _BrandWidgetState extends State<BrandWidget> {
       AppAssets.brandNike
     ];
 
-    showBrands(String text, String images) {
-      return GestureDetector(
-        onTap: () {
-          Navigator.of(context).pushNamed(
-            AppRouter.categoryRoute,
-            arguments: CategoryScreenArgs(categoryName: text),
-          );
-        },
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 10),
-          child: Card(
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(10),
-              side: BorderSide(
-                color: Colors.grey.withOpacity(0.2),
-                width: 1,
-              ),
-            ),
-            elevation: 0,
-            color: themeFlag ? AppColors.mirage : AppColors.creamColor,
-            child: Column(
-              children: [
-                SizedBox(
-                  height: MediaQuery.of(context).size.height * 0.14,
-                  width: MediaQuery.of(context).size.width * 0.38,
-                  child: Image.network(images),
-                ),
-                vSizedBox1,
-                Text(
-                  text,
-                  style: CustomTextWidget.bodyText2(
-                    color: themeFlag ? AppColors.creamColor : AppColors.mirage,
-                  ),
-                )
-              ],
-            ),
-          ),
-        ),
-      );
-    }
 
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
@@ -521,48 +490,45 @@ class _BrandWidgetState extends State<BrandWidget> {
             },
             child: Text('See All'),
           ),
+        vSizedBox2,
+        LazyLoadingList(loadMore: (){
+          transationBloc.add(TransactionLoadedEvent(mobileNo: "1234567891", pageNo: "2"));
+          
+        }, child: BlocBuilder<TransationBloc, TransationState>(
+          builder: (context, state){
+             if( state is TransactionLoadingState){
+               return Center(child: Container(
+                   width: 50,
+                   height: 50,
+                   child: CircularProgressIndicator()));
+             }
+             if(state is TransactionLoadedState){
+               final transactions = state.transactionModel;
+
+               return  ListView.builder(
+
+                 itemCount: transactions.length,
+                 itemBuilder: (context, index) {
+                   return ListTile(
+                     title: Text('Transaction ID: ${transactions[index].status.toString()}'),
+                     subtitle: Text('Amount: ${transactions[index].totalPages.toString()}'),
+                   );
+                 },
+               );
+             }
+
+             if(state is TransactionErrorState){
+               return Center(child: Text('Error: ${state.errorMessage}'));
+             }
+
+             return Container();
+          },
+
+
+    ) ,index: 10, hasMore: true)
+        
       ],
 
-/*
-        SizedBox(
-            height: MediaQuery.of(context).size.height * 0.20,
-            width: MediaQuery.of(context).size.width,
-            child: FutureBuilder(
-              future: SellerAPI.sellerlist(),
-              builder: (ctx, snapshot) {
-                if (snapshot.connectionState == ConnectionState.done) {
-                  if (snapshot.hasError) {
-                    return Center(
-                      child: Text(
-                        "${snapshot.error}occurred",
-                        style: TextStyle(fontSize: 18),
-                      ),
-                    );
-                  } else {
-                    if (snapshot.hasData) {
-
-                      return ListView.builder(
-                        shrinkWrap: false,
-                        scrollDirection: Axis.horizontal,
-                        physics: const ScrollPhysics(),
-                        itemCount:  snapshot.data!.sellers!.length,
-                        itemBuilder: (BuildContext context, int index) {
-                          return showBrands(
-                            snapshot.data!.sellers![index].name.toString(),
-                              snapshot.data!.sellers![index].profilePhoto.toString(),
-                          );
-                        },
-                      );
-                    }
-                  } // Displaying LoadingSpinner to indicate waiting state
-
-                }
-                return Center(
-                  child: CircularProgressIndicator(),
-                );
-              },
-            ))
-*/
     );
   }
 }

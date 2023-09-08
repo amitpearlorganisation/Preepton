@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_flushbar/flutter_flushbar.dart';
+import 'package:peerp_toon/app/database/hive.dart';
+import 'package:peerp_toon/app/database/models/signup_model.dart';
 import 'package:peerp_toon/presentation/screens/signUpScreen/signup_bloc/sign_up_bloc.dart';
 import 'package:peerp_toon/presentation/screens/signUpScreen/widget/welcome.signup.widget.dart';
 

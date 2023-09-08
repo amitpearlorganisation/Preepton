@@ -8,6 +8,8 @@ import 'package:peerp_toon/presentation/screens/productCategory/product_details.
 import 'package:peerp_toon/presentation/widgets/dimensions.widget.dart';
 
 import '../../../Bloc/product_bloc.dart';
+import '../../../app/models/product_models.dart';
+import '../searchScreen/search.screen.dart';
 
 class ProductCategory extends StatefulWidget {
   const ProductCategory({super.key});
@@ -172,7 +174,12 @@ class _ProductCategoryState extends State<ProductCategory> {
                                           color: Colors.greenAccent,
                                           child: IconButton(
                                             padding: EdgeInsets.all(0),
-                                            onPressed: (){},icon: Icon(Icons.shopping_cart,color: Colors.white,),
+                                            onPressed: (){
+                                              final snackBar = SnackBar(
+                                                content: Text('${state.productModel[index].title.toString()} is add to cart'),
+                                                duration: Duration(seconds: 2), // Adjust the duration as needed
+                                              );
+                                              ScaffoldMessenger.of(context).showSnackBar(snackBar);                                            },icon: Icon(Icons.shopping_cart,color: Colors.white,),
                                           ),
                                         ),
                                       )
@@ -259,6 +266,7 @@ class _ProductCategoryState extends State<ProductCategory> {
           return SizedBox();
       })
     );
+    
   }
 }
 class Product {

@@ -9,7 +9,7 @@ class LoginInitial extends LoginState {
   Status status;
   LoginInitial({this.status= Status.initial});
 
-  LoginInitial copyWith({Status? status}){
+  LoginInitial copyWith(Status? status){
     return LoginInitial(status: status?? this.status);
   }
   @override

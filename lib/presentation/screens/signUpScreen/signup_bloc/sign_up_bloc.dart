@@ -9,14 +9,15 @@ part 'sign_up_state.dart';
 
 class SignUpBloc extends Bloc<SignUpEvent, SignUpInitial> {
   SignUpBloc() : super(SignUpInitial()) {
-    on<SingupTextInputEvent>((event, emit) {
+    on<SingupTextInputEvent>((event, emit) async {
       emit(state.copyWith(Status.loading));
+      await Future.delayed(Duration(seconds: 2));
       print("program is starting");
       if (event.name == "Amit" &&
           event.email == "amit@gmail.com" &&
           event.phone == "123456789"&&
           event.password == event.confirmPassword &&
-      event.Gender == "male"&&
+      event.Gender == "male"|| event.Gender=="female"  || event.Gender =="others"&&
       event.privacypolicy == true&&
       event.notifaction == true
                 

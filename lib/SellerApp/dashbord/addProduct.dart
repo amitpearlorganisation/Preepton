@@ -92,9 +92,10 @@ class _AddProdectState extends State<AddProdect> {
     return Scaffold(
       appBar: AppBar(
         elevation: 0.0,
-        backgroundColor: themeFlag ? AppColors.mirage : AppColors.creamColor,
+        backgroundColor: Colors.pinkAccent,
+        title: Text("Register Product",style: TextStyle(color: Colors.white, fontFamily: "Libre"), ),
         iconTheme: IconThemeData(
-            color: themeFlag ? AppColors.creamColor : AppColors.mirage),
+            color: Colors.white),
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -106,21 +107,21 @@ class _AddProdectState extends State<AddProdect> {
                 child: Column(
                   children: [
                     vSizedBox1,
-                    Text("Product Details", style: TextStyle( fontSize: 20, fontWeight: FontWeight.w400,letterSpacing: 1,color: Colors.black),),
+                    Text("Product Details", style: TextStyle( fontSize: 16, fontWeight: FontWeight.w400,letterSpacing: 1,color: Colors.black, fontFamily: "Libre"),),
                     Padding(padding: EdgeInsets.only(left: 10, right: 10, top: 30),
                          child:
                          Container(
                            height: 60,
                            decoration: BoxDecoration(
                              border: Border.all(
-                               width: 2,
-                               color: Colors.black,
+                               width: 1,
+                               color: Colors.pinkAccent,
                              ),
                              borderRadius: BorderRadius.circular(10),
                            ),
                            child: DropdownButton<String>(
                              value: _selectedCategory,
-                             hint: Text('Choose product category'),
+                             hint: Text('Choose product category', style: TextStyle(fontSize: 14, color: Colors.black, fontFamily: "Libre"),),
                              isExpanded: true,
                              onChanged: (String? value) {
                                setState(() {

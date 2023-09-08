@@ -1,3 +1,4 @@
+import 'package:blurrycontainer/blurrycontainer.dart';
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -34,14 +35,12 @@ class _HomeDeshbordSellerState extends State<HomeDeshbordSeller> {
       themeFlag ? AppColors.mirage : AppColors.creamColor,
       appBar: AppBar(
         elevation: 0.0,
-        backgroundColor:
-        themeFlag ? AppColors.mirage : AppColors.creamColor,
+        backgroundColor:Colors.pinkAccent,
         iconTheme: IconThemeData(
             color: themeFlag ? AppColors.creamColor : AppColors.mirage),
       ),
       drawer: Drawer(
-        backgroundColor:
-        themeFlag ? AppColors.mirage : AppColors.creamColor,
+        backgroundColor:Colors.pinkAccent,
         shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.only(
                 topRight: Radius.circular(20),
@@ -51,9 +50,7 @@ class _HomeDeshbordSellerState extends State<HomeDeshbordSeller> {
           children: <Widget>[
             DrawerHeader(
               decoration: BoxDecoration(
-                  color: themeFlag
-                      ? AppColors.mirage
-                      : AppColors.creamColor),
+                  color: Colors.pinkAccent),
               child: Column(
                 children: [
                   ClipOval(
@@ -62,21 +59,21 @@ class _HomeDeshbordSellerState extends State<HomeDeshbordSeller> {
                   SizedBox(height: 5,),
                   Text(
                     "Govind lodhi",
-                    style: GoogleFonts.poppins(
-                        color: Colors.black, fontSize: 12, letterSpacing: 2),
+                    style:TextStyle(
+                        color: Colors.white, fontSize: 12, letterSpacing: 1,fontFamily: "Libre" ),
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Icon(
                         Icons.email,
-                        color: Colors.red,
+                        color: Colors.white,
                       ),
                       SizedBox(width: 5,),
                       Text(
                         "govind@gmail.com",
-                        style: GoogleFonts.poppins(
-                            color: Colors.black, fontSize: 10, letterSpacing: 2),
+                        style: TextStyle(
+                            color: Colors.white, fontSize: 10, letterSpacing: 1,fontFamily: "Libre"),
                       ),
                     ],
                   )
@@ -86,10 +83,9 @@ class _HomeDeshbordSellerState extends State<HomeDeshbordSeller> {
             ListTile(
               leading: Icon(
                 Icons.home,
-                color:
-                themeFlag ? AppColors.creamColor : AppColors.mirage,
+                color:Colors.white,
               ),
-              title: const Text('Home'),
+              title: const Text('Home', style: TextStyle(fontFamily: ":Libre",color: Colors.white),),
               onTap: () {
                 Navigator.push(
                     context,
@@ -101,10 +97,9 @@ class _HomeDeshbordSellerState extends State<HomeDeshbordSeller> {
             ListTile(
               leading: Icon(
                 Icons.account_circle_rounded,
-                color:
-                themeFlag ? AppColors.creamColor : AppColors.mirage,
+                color:Colors.white,
               ),
-              title: const Text('Profile '),
+              title: const Text('Profile ',style: TextStyle(fontFamily: ":Libre",color: Colors.white)),
               onTap: () {
                 Navigator.push(
                     context,
@@ -114,15 +109,10 @@ class _HomeDeshbordSellerState extends State<HomeDeshbordSeller> {
             ),
             ListTile(
               leading: Icon(EvaIcons.shoppingCart,
-                  color: themeFlag
-                      ? AppColors.creamColor
-                      : AppColors.mirage),
+                  color:Colors.white),
               title: Text(
                 'Product',
-                style: TextStyle(
-                    color: themeFlag
-                        ? AppColors.creamColor
-                        : AppColors.mirage),
+                  style: TextStyle(fontFamily: ":Libre",color: Colors.white)
               ),
               onTap: () {
                 Navigator.push(
@@ -136,13 +126,10 @@ class _HomeDeshbordSellerState extends State<HomeDeshbordSeller> {
               leading: Icon(
                 Icons.sell,
                 color:
-                themeFlag ? AppColors.creamColor : AppColors.mirage,
+               Colors.white,
               ),
               title: Text('Sale Product',
-                  style: TextStyle(
-                      color: themeFlag
-                          ? AppColors.creamColor
-                          : AppColors.mirage)),
+                 style: TextStyle(fontFamily: ":Libre",color: Colors.white),),
               onTap: () {
                 Navigator.push(
                     context,
@@ -154,13 +141,10 @@ class _HomeDeshbordSellerState extends State<HomeDeshbordSeller> {
               leading: Icon(
                 Icons.contacts,
                 color:
-                themeFlag ? AppColors.creamColor : AppColors.mirage,
+               Colors.white,
               ),
               title: Text('Contact Us',
-                  style: TextStyle(
-                      color: themeFlag
-                          ? AppColors.creamColor
-                          : AppColors.mirage)),
+                  style: TextStyle(fontFamily: ":Libre",color: Colors.white)),
               onTap: () {
                 Navigator.push(
                   context,
@@ -170,21 +154,18 @@ class _HomeDeshbordSellerState extends State<HomeDeshbordSeller> {
           ],
         ),
       ),
-      body: Padding(
-        padding: const EdgeInsets.only(left: 20,right: 20,top: 20),
-        child: SingleChildScrollView(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-            Container(
-            width: double.infinity,
+      body: SingleChildScrollView(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: BlurryContainer(
 
-            decoration: BoxDecoration(
-                color:Colors.green,
-                // themeFlag ? AppColors.Con : AppColors.mirage,
-                borderRadius: BorderRadius.circular(12)
-            ),
+            width: double.infinity,
+            color: Colors.white,
+            elevation: 8,
             child: Padding(
               padding: const EdgeInsets.only(left: 20,right: 20,top: 10),
               child: Column(
@@ -195,9 +176,9 @@ class _HomeDeshbordSellerState extends State<HomeDeshbordSeller> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text("Shop Name",style: TextStyle(
-                        fontSize: 20,
-                      color:
-                      themeFlag ? AppColors.white : AppColors.white,
+                        fontSize: 16,
+                      color:Colors.pinkAccent,
+                      fontFamily: "Libre"
                     ),),
                     Container(
                         width: 50,
@@ -212,109 +193,118 @@ class _HomeDeshbordSellerState extends State<HomeDeshbordSeller> {
                         )),
                   ],
                 ),
-                Text("IND 24,000",style: TextStyle(fontSize: 40, color:
-                themeFlag ? AppColors.white : AppColors.white,),),
+                Text("IND 24,000",style: TextStyle(fontSize: 14, color:Colors.black, fontFamily: "Libre"),),
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text("Total :",style: TextStyle(fontSize: 25, color:
-                    themeFlag ? AppColors.white : AppColors.white,),),
-                    Text("15",style: TextStyle(fontSize: 25, color:
-                    themeFlag ? AppColors.white : AppColors.white,),),
-                    GestureDetector(
-                      onTap: (){
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (context) => AddProdect()));
-                      },
-                      child: Container(width: 120,
-                          height: 30,
-                      decoration: BoxDecoration(
-                        color:themeFlag? AppColors.rawSienna : AppColors.rawSienna,
-                        borderRadius: BorderRadius.circular(12)
-                      ),
-                        child: Center(child: Text("ADD PRODUCT")),
+                    Text("Total :",style: TextStyle(fontSize: 14, color: Colors.black,fontFamily: "Libre"),),
+                    Text("15",style: TextStyle(fontSize: 14, color: Colors.black,fontFamily: "Libre",),),
+                    Expanded(
+                      child: Container(
+                        width: double.infinity,
+                        alignment: Alignment.topRight,
+                        child: GestureDetector(
+                          onTap: (){
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (context) => AddProdect()));
+                          },
+                          child: Container(width: 110,
+                              height: 30,
+                          decoration: BoxDecoration(
+                            color:Colors.pinkAccent,
+                            borderRadius: BorderRadius.circular(20)
+                          ),
+                            child: Center(child: Text("ADD PRODUCT", style: TextStyle(fontFamily: "Libre", fontSize: 10, ),)),
+                          ),
+                        ),
                       ),
                     )
                   ],
                 )
               ],),
             ),
+        ),
           ),
-              vSizedBox2,
-              Text("Orders List ",style: TextStyle(fontSize: 20),),
-              vSizedBox2,
-              Container(
+            vSizedBox2,
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text("Orders List ",style: TextStyle(fontSize: 14, fontFamily: "libre"),),
+            ),
+            vSizedBox2,
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: BlurryContainer(
                 width: double.infinity,
-                height: 177,
-                decoration: BoxDecoration(
-                  color: AppColors.mediumPurple,
-                  borderRadius: BorderRadius.circular(12)
-                ),
+                height: 400,
+                color: Colors.white,
+                elevation: 0.1,
                 child:  ListView.builder(
-                    itemCount: 5,
+                    itemCount: 10,
                     itemBuilder: (BuildContext context, int index) {
-                      return Padding(
-                        padding: const EdgeInsets.all(8.0),
+                      return Card(
+                        color: Colors.pinkAccent,
+                        margin: EdgeInsets.symmetric(horizontal: 5,vertical: 5),
                         child: ListTile(
 
-                            trailing: Column(
-                              children: [
-                                const Text(
-                                  "1500",
-                                  style: TextStyle(color: Colors.black, fontSize: 15),
-                                ),
-                                Container(
-                                  width: 106,
-                                  height: 26,
-                                  decoration: BoxDecoration(
-                                    color: Color(0xffD7834F),
-                                    borderRadius: BorderRadius.circular(12)
-                                  ),
-                                  child: Center(child: Text("Order Accept ",style: TextStyle(color: Colors.white),),),
-                                )
-                              ],
-                            ),
-                            title: Column(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
 
-                                Text(" $index.  Vikrant bhawani"),
-                                Text("Deharadun"),
-                              ],
-                            )),
+
+
+
+                            trailing:                                  Container(
+                              width: 106,
+                              height: 26,
+                              decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.circular(12)
+                              ),
+                              child: Center(child: Text("Order Accept ",style: TextStyle(color: Colors.black,fontFamily: "Libre",fontSize: 11),),),
+                            ),
+
+                          // Column(
+                          //     children: [
+                          //       const Text(
+                          //         "1500",
+                          //         style: TextStyle(color: Colors.white, fontSize: 14),
+                          //       ),
+                          //     ],
+                          //   )
+                            title:    Text(" $index.  Vikrant bhawani", style: TextStyle(color: Colors.white,fontFamily: "Libre",fontSize: 11),),
+                          subtitle: Text(
+                            "1500",
+                            style: TextStyle(color: Colors.white, fontSize: 11),
+                          ),
+                        ),
                       );
                     }),
 
 
               ),
-              vSizedBox2,
-              Text("Product List",style: TextStyle(fontSize: 20),),
-              SizedBox(height: 5,),
-              SizedBox(
-                width: double.infinity,
-                height: 230,
-                child: ListView.builder(
-                  scrollDirection: Axis.horizontal,
-                  itemCount: productList.length,
-                  itemBuilder: (context, index) {
-                    return ProductListWidget(
-                      name: productList[index]['name'],
-                      imageUrl: productList[index]['imageUrl'],
-                      price: productList[index]['price'],
-                    );
-                  },
-                ),
-              ),
+            ),
+            // vSizedBox2,
+            // Text("Product List",style: TextStyle(fontSize: 20),),
+            // SizedBox(height: 5,),
+            // SizedBox(
+            //   width: double.infinity,
+            //   height: 230,
+            //   child: ListView.builder(
+            //     scrollDirection: Axis.horizontal,
+            //     itemCount: productList.length,
+            //     itemBuilder: (context, index) {
+            //       return ProductListWidget(
+            //         name: productList[index]['name'],
+            //         imageUrl: productList[index]['imageUrl'],
+            //         price: productList[index]['price'],
+            //       );
+            //     },
+            //   ),
+            // ),
 
-              vSizedBox2,
+            // vSizedBox2,
 
 
 
 
-        ],
-          ),
+      ],
         ),
       ),
     );

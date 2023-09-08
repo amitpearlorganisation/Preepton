@@ -8,6 +8,9 @@ class SignUpScreen extends StatefulWidget {
 }
 
 class _SignUpScreenState extends State<SignUpScreen> {
+
+  final HiveMethods hiveMethods = HiveMethods();
+
   final TextEditingController userEmailController = TextEditingController();
 
   final TextEditingController userNameController = TextEditingController();
@@ -485,17 +488,30 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                   ),
                                   onPressed: () async {
                                     print("Selected gender-----> $selectedGender");
-                                    signUpBloc.add(SingupTextInputEvent(
-                                      name: userNameController.text.trim(),
-                                      email: userEmailController.text.trim(),
-                                      phone: phoneNumberController.text.trim(),
-                                      password: userPassController.text.trim(),
-                                      confirmPassword:
-                                          confirmPasswordController.text.trim(),
-                                      Gender: selectedGender,
-                                      notifaction: _isNotificationEnabled,
-                                      privacypolicy: _acceptPrivacyPolicy,
-                                    ));
+
+                                    if(userNameController.text.isNotEmpty &&  userEmailController.text.isNotEmpty && phoneNumberController.text.isNotEmpty && userPassController.text.isNotEmpty) {
+
+                                      hiveMethods.addUser(SignUpModel(id: 1, user_name: userNameController.text.toString(), email: userEmailController.text.toString(),
+                                          phone_number: phoneNumberController.text.toString(), gender: selectedGender,
+                                          accept_policy: _acceptPrivacyPolicy,
+                                          password: userPassController.text.toString()));
+                                      signUpBloc.add(SingupTextInputEvent(
+                                        name: userNameController.text.trim(),
+                                        email: userEmailController.text.trim(),
+                                        phone: phoneNumberController.text
+                                            .trim(),
+                                        password: userPassController.text
+                                            .trim(),
+                                        confirmPassword:
+                                        confirmPasswordController.text.trim(),
+                                        Gender: selectedGender,
+                                        notifaction: _isNotificationEnabled,
+                                        privacypolicy: _acceptPrivacyPolicy,
+                                      ));
+                                    }
+                                    else{
+                                      print("else condition rung in signup screen");
+                                    }
                                   },
                                   color: Colors.white.withOpacity(0.9),
                                   child: const Text(

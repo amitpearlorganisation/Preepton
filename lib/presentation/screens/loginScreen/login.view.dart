@@ -32,7 +32,8 @@ class LoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  BlocProvider(
+    return
+      BlocProvider(
       create: (context) => bloc,
       child: BlocConsumer<LoginBloc, LoginInitial>(
         listener: (context, state) {
@@ -43,7 +44,7 @@ class LoginScreen extends StatelessWidget {
           if(state.status == Status.success){
             EasyLoading.dismiss();
             EasyLoading.showSuccess("Successfully done ", duration: Duration(seconds: 3),);
-            Navigator.push(context, MaterialPageRoute(builder: (context)=>ProductScreen()));
+            Navigator.push(context, MaterialPageRoute(builder: (context)=>HomeScreen()));
 
           }
           if(state.status == Status.failed){
@@ -52,9 +53,7 @@ class LoginScreen extends StatelessWidget {
           }
         },
         builder: (context, state) {
-          if (state.status == Status.loading) {
-            EasyLoading.show(status: 'Loading...');
-          }
+
           return
 
 

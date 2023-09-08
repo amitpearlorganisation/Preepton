@@ -89,10 +89,13 @@ class _SellerRegistrationState extends State<SellerRegistration> {
     return Scaffold(
       appBar: AppBar(
         title: Text("Store Registration"),
+        backgroundColor: Colors.pinkAccent,
       ),
-      body: Stepper(
+      body:
+      Stepper(
         type: StepperType.horizontal,
         steps: getSteps(),
+        elevation: 1,
         currentStep: currentStep,
         onStepContinue: () {
           final isLastStep = currentStep == getSteps().length -1;
@@ -112,6 +115,7 @@ class _SellerRegistrationState extends State<SellerRegistration> {
             currentStep -=1;
           });
         },
+
       ),
     );
   }
@@ -157,7 +161,7 @@ class _SellerRegistrationState extends State<SellerRegistration> {
                     Container(
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10),
-                        border: Border.all(width: 2),
+                        border: Border.all(width: 1, color: Colors.pinkAccent),
                       ),
                       child: TextFormField(
                         decoration: InputDecoration(
@@ -172,7 +176,7 @@ class _SellerRegistrationState extends State<SellerRegistration> {
                       decoration: BoxDecoration(
 
                         borderRadius: BorderRadius.circular(10),
-                        border: Border.all(width: 2),
+                        border: Border.all(width: 1, color: Colors.pinkAccent),
                       ),
                       child: TextFormField(
                         decoration: InputDecoration(
@@ -186,7 +190,7 @@ class _SellerRegistrationState extends State<SellerRegistration> {
                     Container(
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10),
-                        border: Border.all(width: 2),
+                        border: Border.all(width: 1, color: Colors.pinkAccent),
                       ),
                       child: TextFormField(
 
@@ -203,7 +207,7 @@ class _SellerRegistrationState extends State<SellerRegistration> {
                     Container(
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10),
-                        border: Border.all(width: 2),
+                        border: Border.all(width: 1, color: Colors.pinkAccent),
                       ),
                       child: TextFormField(
                         decoration: InputDecoration(
@@ -219,7 +223,7 @@ class _SellerRegistrationState extends State<SellerRegistration> {
                       width: double.infinity,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10),
-                        border: Border.all(width: 2),
+                        border: Border.all(width: 1, color: Colors.pinkAccent),
 
                       ),
 /*
@@ -262,11 +266,17 @@ class _SellerRegistrationState extends State<SellerRegistration> {
                               height: 50,
                                 color: Colors.white,
                                 elevation: 0,
-                                child: const Text(
-                                    "Upload Cancelled cheque",
-                                    style: TextStyle(
-                                        color: Colors.black, fontWeight: FontWeight.bold
-                                    )
+                                child: Row(
+                                  children: [
+                                    Icon(Icons.file_copy, color: Colors.pinkAccent,),
+                                    SizedBox(width: 10,),
+                                    const Text(
+                                        "Upload Cancelled cheque",
+                                        style: TextStyle(
+                                            color: Colors.black, fontWeight: FontWeight.w400,fontFamily: "Libre"
+                                        )
+                                    ),
+                                  ],
                                 ),
                                 onPressed: () {
                                   pickImage();
@@ -289,11 +299,18 @@ class _SellerRegistrationState extends State<SellerRegistration> {
                                 height: 50,
                                 color: Colors.white,
                                 elevation: 0,
-                                child: const Text(
-                                    "upload Pan Card",
-                                    style: TextStyle(
-                                        color: Colors.black, fontWeight: FontWeight.bold
-                                    )
+                                child: Row(
+                                  children: [
+                                    Icon(Icons.upload_file, color: Colors.pinkAccent,),
+                                    SizedBox(width: 10,),
+                                    const Text(
+                                        "upload Pan Card",
+                                        style: TextStyle(
+                                            color: Colors.black, fontWeight: FontWeight.w400,
+                                          fontFamily: "Libre"
+                                        )
+                                    ),
+                                  ],
                                 ),
                                 onPressed: () {
                                   pickPanImage();
@@ -316,11 +333,17 @@ class _SellerRegistrationState extends State<SellerRegistration> {
                                 height: 50,
                                 color: Colors.white,
                                 elevation: 0,
-                                child: const Text(
-                                    "Upload Adhar Card",
-                                    style: TextStyle(
-                                        color: Colors.black, fontWeight: FontWeight.bold
-                                    )
+                                child: Row(
+                                  children: [
+                                    Icon(Icons.upload_file, color: Colors.pinkAccent,),
+                                    SizedBox(width: 10,),
+                                    const Text(
+                                        "Upload Adhar Card",
+                                        style: TextStyle(
+                                            color: Colors.black, fontWeight: FontWeight.w400, fontFamily: "Libre"
+                                        )
+                                    ),
+                                  ],
                                 ),
                                 onPressed: () {
                                   pickAdharImage();
@@ -343,11 +366,18 @@ class _SellerRegistrationState extends State<SellerRegistration> {
                                 height: 50,
                                 color: Colors.white,
                                 elevation: 0,
-                                child: const Text(
-                                    "Upload  gst number",
-                                    style: TextStyle(
-                                        color: Colors.black, fontWeight: FontWeight.bold
-                                    )
+                                child: Row(
+                                  children: [
+                                    Icon(Icons.upload_file, color: Colors.pinkAccent,),
+                                    SizedBox(width: 10,),
+
+                                    const Text(
+                                        "Upload  gst number",
+                                        style: TextStyle(
+                                            color: Colors.black, fontWeight: FontWeight.w400,fontFamily: "Libre"
+                                        )
+                                    ),
+                                  ],
                                 ),
                                 onPressed: () {
                                   pickGstImage();
@@ -370,11 +400,17 @@ class _SellerRegistrationState extends State<SellerRegistration> {
                                 height: 50,
                                 color: Colors.white,
                                 elevation: 0,
-                                child: const Text(
-                                    "Upload shop image-1",
-                                    style: TextStyle(
-                                        color: Colors.black, fontWeight: FontWeight.bold
-                                    )
+                                child: Row(
+                                  children: [
+                                    Icon(Icons.upload_file, color: Colors.pinkAccent,),
+                                    SizedBox(width: 10,),
+                                    const Text(
+                                        "Upload shop image-1",
+                                        style: TextStyle(
+                                            color: Colors.black, fontWeight: FontWeight.w400,fontFamily: "Libre"
+                                        )
+                                    ),
+                                  ],
                                 ),
                                 onPressed: () {
                                   pickShop1Image();
@@ -397,11 +433,18 @@ class _SellerRegistrationState extends State<SellerRegistration> {
                                 height: 50,
                                 color: Colors.white,
                                 elevation: 0,
-                                child: const Text(
-                                    "Upload shop image-2",
-                                    style: TextStyle(
-                                        color: Colors.black, fontWeight: FontWeight.bold
-                                    )
+                                child: Row(
+                                  children: [
+
+                                    Icon(Icons.upload_file, color: Colors.pinkAccent,),
+                                    SizedBox(width: 10,),
+                                    const Text(
+                                        "Upload shop image-2",
+                                        style: TextStyle(
+                                            color: Colors.black, fontWeight: FontWeight.w400,fontFamily: "Libre"
+                                        )
+                                    ),
+                                  ],
                                 ),
                                 onPressed: () {
                                   pickShop2Image();
@@ -424,11 +467,17 @@ class _SellerRegistrationState extends State<SellerRegistration> {
                                 height: 50,
                                 color: Colors.white,
                                 elevation: 0,
-                                child: const Text(
-                                    "Upload shop image-3",
-                                    style: TextStyle(
-                                        color: Colors.black, fontWeight: FontWeight.bold
-                                    )
+                                child: Row(
+                                  children: [
+                                    Icon(Icons.upload_file, color: Colors.pinkAccent,),
+                                    SizedBox(width: 10,),
+                                    const Text(
+                                        "Upload shop image-3",
+                                        style: TextStyle(
+                                            color: Colors.black, fontWeight: FontWeight.w400,fontFamily: "Libre"
+                                        )
+                                    ),
+                                  ],
                                 ),
                                 onPressed: () {
                                   pickShop3Image();
