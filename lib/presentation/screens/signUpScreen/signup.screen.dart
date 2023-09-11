@@ -21,6 +21,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   final TextEditingController confirmPasswordController =
       TextEditingController();
+
+
   String selectedGender = "";
 
   final _formKey = GlobalKey<FormState>();
@@ -44,7 +46,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   SignUpBloc signUpBloc = SignUpBloc();
 
+
   @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+  }
+
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => signUpBloc,

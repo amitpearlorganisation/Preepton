@@ -18,7 +18,7 @@ class AddressDialog extends StatefulWidget {
   _AddressDialogState createState() => _AddressDialogState();
 }
 String simCardSerialNumber = '';
-LocationCubit loc = LocationCubit(LocationService());
+// LocationCubit loc = LocationCubit(LocationService());
 
 class _AddressDialogState extends State<AddressDialog> {
   String _selectedCountry = 'India';
@@ -28,7 +28,7 @@ class _AddressDialogState extends State<AddressDialog> {
   String _pinCode = '';
   String _houseNo = '';
   String _nearbyPlace = '';
-  var locationService = getIt<LocationService>();
+  // var locationService = getIt<LocationService>();
   final _formKey = GlobalKey<FormState>();
   String _currentLocation = '';
  TextEditingController cityController = TextEditingController();
@@ -72,30 +72,30 @@ class _AddressDialogState extends State<AddressDialog> {
                       GestureDetector(
                         onTap: () async {
                           // locationService.getLocation();
-
-                          EasyLoading.show();
-                          var location = await locationService.getLocation();
-                          EasyLoading.dismiss();
-                          List<String> parts = location.split(', ');
-
-                          // Now, 'parts' contains all the address components separated by commas
-
-                          // You can access the individual parts or store them in variables
-                          String part1 = parts.isNotEmpty ? parts[0] : '';
-                          String part2 = parts.length > 1 ? parts[1] : '';
-                          String streat = parts.length > 2 ? parts[2] : '';
-                          String part4 = parts.length > 3 ? parts[3] : '';
-                          String city = parts.length > 4 ? parts[4] : '';
-                          String part6 = parts.length > 5 ? parts[5] : '';
-                          String part7 = parts.length > 6 ? parts[6]: "";
-                          String input = part7;
-                          RegExp regex = RegExp(r'\d+');
-                          Match match = regex.firstMatch(input) as Match;
-                          String? numericPart = match != null ? match.group(0) : "";
-                            streatController.text = streat;
-                           pinCodeController.text = numericPart!;
-                          cityController.text = city;
-                          print(streat );
+                          //
+                          // EasyLoading.show();
+                          // // var location = await locationService.getLocation();
+                          // EasyLoading.dismiss();
+                          // List<String> parts = location.split(', ');
+                          //
+                          // // Now, 'parts' contains all the address components separated by commas
+                          //
+                          // // You can access the individual parts or store them in variables
+                          // String part1 = parts.isNotEmpty ? parts[0] : '';
+                          // String part2 = parts.length > 1 ? parts[1] : '';
+                          // String streat = parts.length > 2 ? parts[2] : '';
+                          // String part4 = parts.length > 3 ? parts[3] : '';
+                          // String city = parts.length > 4 ? parts[4] : '';
+                          // String part6 = parts.length > 5 ? parts[5] : '';
+                          // String part7 = parts.length > 6 ? parts[6]: "";
+                          // String input = part7;
+                          // RegExp regex = RegExp(r'\d+');
+                          // Match match = regex.firstMatch(input) as Match;
+                          // String? numericPart = match != null ? match.group(0) : "";
+                          //   streatController.text = streat;
+                          //  pinCodeController.text = numericPart!;
+                          // cityController.text = city;
+                          // print(streat );
                           setState(() {
 
                           });

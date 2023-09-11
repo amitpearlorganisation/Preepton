@@ -4,6 +4,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/adapters.dart';
+// import 'package:hive/hive.dart';
+// import 'package:hive_flutter/adapters.dart';
 import 'package:peerp_toon/Bloc/product_bloc.dart';
 import 'package:peerp_toon/app/Repository/produt_repo.dart';
 import 'package:peerp_toon/core/service/locator.dart';
@@ -20,7 +22,7 @@ if (dart.library.html) 'web_url/configure_web.dart';
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
   Bloc.observer = MyBlocObserver();
-  locator();
+  // locator();
   await Hive.initFlutter();
   await Hive.openBox('hive_local_db');
   runApp(
